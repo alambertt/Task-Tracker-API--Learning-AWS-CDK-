@@ -1,6 +1,6 @@
 # Task Tracker API - Serverless Backend
 
-This project demonstrates how to build a simple, serverless task tracker backend using AWS services. The API allows users to create, retrieve, update, and delete tasks, and is powered by AWS Lambda, API Gateway, and DynamoDB. This backend is designed to be cost-effective, scalable, and easy to maintain, providing a solid foundation for learning AWS CDK in TypeScript.
+This project demonstrates how to build a simple, serverless task tracker backend using AWS services. **The objective of this project is to learn how to utilize the AWS Cloud Development Kit (CDK) to address a straightforward project designed for educational purposes.** The API allows users to create, retrieve, update, and delete tasks, and is powered by AWS Lambda, API Gateway, and DynamoDB. This backend is designed to be cost-effective, scalable, and easy to maintain, providing a solid foundation for learning AWS CDK in TypeScript.
 
 ## Features
 
