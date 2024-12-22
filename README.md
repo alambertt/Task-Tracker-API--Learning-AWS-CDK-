@@ -48,6 +48,21 @@ This project demonstrates how to build a simple, serverless task tracker backend
 - DynamoDB
 - CloudWatch Logs
 
+## How to test the API
+
+### Create a Task
+
+```bash
+curl --location --request GET 'https://<apigateway-id>.<region>.amazonaws.com/tasks' \
+--header 'Content-Type: text/plain' \
+--data '{
+        "taskId": "1",
+        "title": "Primary Task",
+        "description": "This is a description",
+        "status": "TODO"
+    }'
+```
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
