@@ -3,6 +3,10 @@
 *.d.ts
 node_modules
 
+# Track all files in lambda folder
+!lambda/
+!lambda/**/*.js
+
 # CDK asset staging directory
 .cdk.staging
 cdk.out
