@@ -36,10 +36,20 @@ export class TaskTrackerApiStack extends cdk.Stack {
       },
     });
 
+    // Add Delete Task Lambda
+    const deleteTaskFunction = new lambda.Function(this, 'DeleteTaskFunction', {
+      runtime: lambda.Runtime.PYTHON_3_9,
+      handler: 'delete_task.lambda_handler',
+      code: lambda.Code.fromAsset(path.join(__dirname, '../lambda/deleteTask')),
+      environment: {
+        TABLE_NAME: table.tableName,
+      },
+    });
 
     // Grant DynamoDB Permissions
     table.grantReadWriteData(createTaskFunction);
     table.grantReadData(listTasksFunction);
+    table.grantWriteData(deleteTaskFunction);
 
     // API Gateway
     // Create HTTP API Gateway
@@ -47,7 +57,7 @@ export class TaskTrackerApiStack extends cdk.Stack {
       apiName: 'TaskTrackerHttpApi',
       corsPreflight: {
         allowHeaders: ['Content-Type'],
-        allowMethods: [apigatewayv2.CorsHttpMethod.GET, apigatewayv2.CorsHttpMethod.POST],
+        allowMethods: [apigatewayv2.CorsHttpMethod.GET, apigatewayv2.CorsHttpMethod.POST, apigatewayv2.CorsHttpMethod.DELETE],
         allowOrigins: ['*'],
       }
     });
@@ -64,6 +74,13 @@ export class TaskTrackerApiStack extends cdk.Stack {
       path: '/tasks',
       methods: [ apigatewayv2.HttpMethod.POST ],
       integration: new integrations.HttpLambdaIntegration('CreateTaskIntegration', createTaskFunction),
+    });
+
+    // Add DELETE route
+    httpApi.addRoutes({
+      path: '/tasks/{taskId}',
+      methods: [ apigatewayv2.HttpMethod.DELETE ],
+      integration: new integrations.HttpLambdaIntegration('DeleteTaskIntegration', deleteTaskFunction),
     });
 
     // Output the HTTP API endpoint
