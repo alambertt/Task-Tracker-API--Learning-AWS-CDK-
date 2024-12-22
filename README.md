@@ -31,6 +31,15 @@ This project demonstrates how to build a simple, serverless task tracker backend
 3. Use AWS CDK to deploy the infrastructure and Lambda functions.
 4. Test the API using tools like Postman or curl.
 
+### Useful commands
+
+- `npm run build`   compile typescript to js
+- `npm run watch`   watch for changes and compile
+- `npm run test`    perform the jest unit tests
+- `npx cdk deploy`  deploy this stack to your default AWS account/region
+- `npx cdk diff`    compare deployed stack with current state
+- `npx cdk synth`   emits the synthesized CloudFormation template
+
 ## Technologies Used
 
 - AWS CDK (TypeScript)
